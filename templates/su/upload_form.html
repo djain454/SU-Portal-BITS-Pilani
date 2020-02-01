@@ -1,0 +1,37 @@
+{% extends 'su/base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}reg{% endblock %}
+
+{% block block1 %}
+	<div id="main" align="center">
+<article class="student featured">
+	{% if d %}
+	<h1>Done!</h1>
+	{% else %}
+
+                    <h2>Upload Students List</h5>
+                    </h2>
+
+
+
+
+    <form action="" enctype="multipart/form-data"  method="post">
+	{% csrf_token %}
+						<div class="col-md-3">
+            {{ form.as_table }} <input class=" btn btn-md btn-info" type="submit" value="Upload">
+</div>
+
+
+
+    </form>
+<p > Note :<br> You have to upload Students List here in the below mentioned format.<br>
+Supported File Formats: xls, xlsx, csv<br>
+    | IDNO    |    NAME   |   BHAWAN   |   ROOM   | <br>
+		| 2017B2A21037P | Abhishek Gaur | BD | 4126 |</p>
+
+	{% endif %}
+</article>
+</div>
+{% endblock %}

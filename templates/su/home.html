@@ -1,0 +1,75 @@
+{% extends 'su/base.html' %}
+
+{% load staticfiles %}
+
+{% block head_block %}
+<meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="708316163186-qoqlukr16k0e0akd27ge4use7fdn8rer.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+{% endblock %}
+
+{% block block1 %}
+	<!--<h1>Please sign in to view contents</h1>-->
+	<!--<div class="text-center">-->
+	<!--<img src="{% static 'user-logo.png' %}" style="height:228px;">-->
+	<!--<br/>-->
+	<!--<a href="/soc/login/google-oauth2/?next=/" ><button type="button" class="btn btn-danger">Google+</button></a>-->
+	<!--</div>-->
+	<div id="main" align="center">
+	<article class="student featured">
+								<header class="major">
+
+									<h2><u>Student Login</u></h2>
+									<p><b>Sign In via BITS University Mail Only</b></p>
+								</header>
+								<img src="{% static 'login.png' %}" alt="" />
+								<a href="/soc/login/google-oauth2/?next=/" ><button type="button" class="btn btn-primary">Google+</button></a>
+								<br>
+								<br>
+</div>
+								<!-- <ul class="actions special"> -->
+									<!-- google oauth -->
+								<!-- <div class="g-signin2" data-onsuccess="onSignIn"> -->
+								<!-- <a ><button type="button" class="btn btn-danger">Google+</button></a> -->
+									<!--<input type="image" src="/soc/login/google-oauth2/?next=/" alt="Submit" width="239" height="46"/>-->
+									<!-- </div>
+								</ul>-->
+<!--
+							<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+						     <script>
+						       function onSignIn(googleUser) {
+						         // Useful data for your client-side scripts:
+						         var profile = googleUser.getBasicProfile();
+						         console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+						         console.log('Full Name: ' + profile.getName());
+						         console.log('Given Name: ' + profile.getGivenName());
+						         console.log('Family Name: ' + profile.getFamilyName());
+						         console.log("Image URL: " + profile.getImageUrl());
+						         console.log("Email: " + profile.getEmail());
+
+						       }
+						     </script>
+
+</div>
+<img src="{% static 'login.png' %}" alt="" data-onsuccess="onSignIn" data-theme="dark" onClick="{% url 'social:begin' 'google-oauth2' %}"/>
+</article> </div>
+
+	 <script>
+		 function onSignIn(googleUser) {
+			 // Useful data for your client-side scripts:
+			 var profile = googleUser.getBasicProfile();
+			 console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+			 console.log('Full Name: ' + profile.getName());
+			 console.log('Given Name: ' + profile.getGivenName());
+			 console.log('Family Name: ' + profile.getFamilyName());
+			 console.log("Image URL: " + profile.getImageUrl());
+			 console.log("Email: " + profile.getEmail());
+
+			 // The ID token you need to pass to your backend:
+			 var id_token = googleUser.getAuthResponse().id_token;
+			 console.log("ID Token: " + id_token);
+		 }
+	 </script> -->
+
+
+{% endblock %}

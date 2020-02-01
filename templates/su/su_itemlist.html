@@ -1,0 +1,145 @@
+{% extends 'su/base.html' %}
+{% load staticfiles %}
+{% block block1 %}
+	<div id="main" align="center">
+<article class="student featured">
+{% if user.is_superuser %}
+
+                    <h2 class="intro-text text-center"><strong><u>Merchandise</u></strong>
+                    </h2>
+
+<table id="example" class="table table-hover" align="center">
+<thead>
+	<tr>
+	    	<th>Name</th>
+	    	<th>Type</th>
+	    	<th>Date</th>
+	    	<th>Deadline</th>
+		<th>Status</th>
+		<th>Registered By</th>
+	</tr>
+</thead>
+<tbody>
+	{% for i in wear %}
+	<tr>
+	<td><a href="/su/su/item/{{ i.gm_id }}/">{{i.name}}</a></td>
+	<td>Wear</td>
+	<td>{{i.date}}</td>
+	<td>{{i.deadline}}</td>
+	<td>{{i.status}}</td>
+	<td>{{i.cg_id}}</td>
+	</tr>
+	 {% endfor %}
+</tbody>
+</table>
+
+
+                    <h2 class="intro-text text-center"><strong><u>Events</u></strong>
+                    </h2>
+
+
+<table id="example" class="table table-hover" align="center">
+
+<thead>
+	<tr>
+	    	<th>Name</th>
+	    	<th>Type</th>
+	    	<th>Date</th>
+	    	<th>Deadline</th>
+		<th>Status</th>
+		<th>Registered By</th>
+	</tr>
+</thead>
+<tbody>
+	{% for i in event %}
+	<tr>
+	<td><a href="/su/su/item/{{ i.gm_id }}/">{{i.name}}</a></td>
+	<td>Event</td>
+	<td>{{i.date}}</td>
+	<td>{{i.deadline}}</td>
+	<td>{{i.status}}</td>
+	<td>{{i.cg_id}}</td>
+	</tr>
+	 {% endfor %}
+</tbody>
+</table>
+
+                    <h2 ><strong><u>Coords Registered</u></strong>
+                    </h2>
+
+<table id="example" class="table table-hover" align="center">
+<thead>
+	<tr>
+	    	<th>Name</th>
+	    	<th>Assoc name</th>
+	    	<th>Bits id</th>
+		<th>Status</th>
+		<th>Change Status</th>
+
+	</tr>
+</thead>
+<tbody>
+	{% for i in coord %}
+	<tr>
+	<td>{{i.user}}</td>
+	<td>{{i.assoc_name}}</td>
+	<td>{{i.cg_bitsid}}</td>
+	<td>{{i.status}}</td>
+	{% ifequal i.status "Active" %}
+	<td><button style="background-color: #f44336;" onclick="confirm('Are you sure you want to Inactivate The coordinator {{ i.user }}?');window.location.href='/su/su/coord-inactive/{{ i.cg_id }}/';">Inactivate</button> </td>
+	{% else %}
+	<td><button style="background-color: #4CAF50; color:#000000;" onclick="confirm('Are you sure you want to Activate The coordinator {{ i.user }}?');window.location.href='/su/su/coord-active/{{ i.cg_id }}/';">Activate</button></td>
+	{% endifequal %}
+	</tr>
+	 {% endfor %}
+</tbody>
+</table>
+{% else %}
+<h3>You are not allowed to view this page</h3>
+<h3>Login to View this page</h3>
+{% endif %}
+</article>
+</div>
+{% endblock %}
+
+
+{% block script %}
+
+<script>
+	$(document).ready(function() {
+    $('#example').DataTable({
+        "lengthMenu": [[10, 25, 50, 100, 200, 300, -1], [10, 25, 50, 100, 200, 300, "All"]],
+	 "order": [],
+    } );
+} );
+	$(document).ready(function() {
+    $('#example2').DataTable({
+        "lengthMenu": [[10, 25, 50, 100, 200, 300, -1], [10, 25, 50, 100, 200, 300, "All"]]
+    } );
+} );
+	$(document).ready(function() {
+    $('#example3').DataTable({
+        "lengthMenu": [[10, 25, 50, 100, 200, 300, -1], [10, 25, 50, 100, 200, 300, "All"]]
+    } );
+} );
+	$(document).ready(function() {
+    $('#example4').DataTable({
+        "lengthMenu": [[10, 25, 50, 100, 200, 300, -1], [10, 25, 50, 100, 200, 300, "All"]]
+    } );
+} );
+function Confirm(){
+var x = return "Are you sure you want to Inactivate The coordinator";
+if (x==true){
+window.location.href='/su/su/coord-inactive/{{ i.cg_id }}/';
+return true;
+}
+else{
+return false;
+}
+}
+</script>
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+
+
+{% endblock %}

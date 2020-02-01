@@ -1,0 +1,82 @@
+{% load static %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>Students' Union</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<meta name="google-signin-scope" content="profile email">
+		<meta name="google-signin-client_id" content="735475341835-fipq107qgc1graj3f96do1kr42f2kdod.apps.googleusercontent.com">
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+    <link type="text/CSS" href="{% static 'css/main.css' %}" rel="stylesheet">
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+    <noscript><link type="text/CSS" href="{% static 'css/noscript.css' %}" rel="stylesheet"></noscript>
+
+
+
+{% block head_block %} {% endblock %}
+</head>
+
+<body class="is-preload">
+<div id="wrapper" class="fade-in">
+    <header id="header">
+					<br>
+
+					<h1> <img id="bits-logo"src="{% static 'bits-logo.png' %}" style= "margin-bottom:-100px;" alt="" width="155" margin="100px 0px 0px" />
+						Students' Union <img id ="su-logo" src="{% static 'sulogo.png' %}" style= "margin-bottom:-100px;" alt="" width="170" /></h1>
+					<h3 >Birla Institute of Technology & Science (BITS) Pilani</h3>
+
+					</header>
+
+    <!-- Navigation -->
+    <nav id="nav">
+
+        <ul class="links">
+                <li><a href="/su/">Home</a></li>
+								<li><a href="/su/about">About</a></li>
+								<li><a href="/su/contact">Contact</a></li>
+
+                    {% if user.is_authenticated %}
+			<li><a href="/su/logout/">Logout</a></li>
+			{% if user.is_superuser %}
+                        <li><a href="/su/su/register/">Register Coords </a></li>
+			<li><a href="/su/su/itemlist/">Signings</a></li>
+
+			{% elif user.is_staff %}
+			<li><a href="/su/coord/register/">Add New Signings</a></li>
+
+			{% else %}
+	<li><a href="/su/student/upcoming_items/">Signings</a></li>
+			{% endif %}
+                    {% else %}
+			<li><a href="/su/su/login/">Admin:Login</a></li>
+                        <li><a href="/su/coord/login/">Coord:Login</a></li>
+                    {% endif %}
+              </ul>
+    </nav>
+
+    {% block block1 %}{% endblock %}
+
+  <div id="copyright">
+			<ul><li>Copyright &copy </li><li>SU Tech Team 2019</li><li>BITS Pilani, Pilani Campus</li></ul>
+	</div>
+</div>
+    <!-- jQuery -->
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.scrollex.min.js' %}"></script>
+		 <script type="text/javascript" src="{% static 'js/jquery.scrolly.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/browser.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/breakpoints.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/util.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/modal.js' %}"></script>
+		<!-- google oauth -->
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+  {% block script %}{% endblock %}
+
+</body>
+
+</html>

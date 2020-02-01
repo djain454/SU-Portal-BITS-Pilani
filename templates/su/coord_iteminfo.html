@@ -1,0 +1,70 @@
+{% extends 'su/base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}{{ item_name }}{% endblock %}
+
+{% block block1 %}
+<div id="main" align="center">
+<article class="student featured">
+{% if user.is_staff %}
+
+
+    {% if wear %}
+		    <h2 class="brand-before text-center">
+			<u>{{wear.meal}}</u>
+                    </h2>
+                    <h2 class="brand-name text-center">{{ wear.name }}</h2>
+
+
+<h4 class="text-center">Image</h4>
+<img class="img-responsive img-full" width="60%" src="{{ wear.image.url }} " alt="">
+
+
+	<h3>Cancellations starts on {{ wear.deadline2 }}<h3>
+	<h3 >Cancellations Deadline: {{wear.deadline}}</h3>
+	<h3  class="text-right"  >Status: {{wear.status}}</h3>
+		<h3>price: {{wear.price}}</h3>
+
+	<h3><a href="/su/stats/{{wear.gm_id}}/"><button class="btn btn-lg btn-info" >View Stats</button></a></h3>
+	{% ifequal e 4 %}
+	<h2 class="text-center text-danger">Signing is over</h2>
+	{% endifequal %}
+<ul>
+
+    {% endif %}
+    {% if event %}
+		    <h2 class="brand-before text-center">
+			<u>{{event.meal}}/<u>
+                    </h2>
+                    <h2 class="brand-name text-center">{{ event.name }}</h2>
+
+
+<h4 class="text-center">Image</h4>
+<img class="img-responsive img-full" width="60%" src="{{ event.image.url }} " alt="">
+
+
+	<h3>Cancellations starts on {{ event.deadline2 }}<h3>
+	<h3 >Cancellations Deadline: {{ event.deadline}}</h3>
+	<h3  class="text-right"  >Status: {{ event.status}}</h3>
+		<h3>price: {{event.price}}</h3>
+		<h3>Venue: {{event.venue}}</h3>
+
+
+	<h3><a href="/su/stats/{{event.gm_id}}/"><button class="btn btn-lg btn-info" >View Stats</button></a></h3>
+	{% ifequal e 4 %}
+	<h1 class="text-center text-danger">Signing is over</h1>
+
+	{% endifequal %}
+<ul>
+
+    {% endif %}
+
+
+{% else %}
+<h3>You are not allowed to view this page</h3>
+<h3>Login to View this page</h3>
+{% endif %}
+</article>
+</div>
+{% endblock %}

@@ -1,0 +1,273 @@
+{% extends 'su/base.html' %}
+
+{% load staticfiles %}
+{% block head_block %}
+<meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="708316163186-qoqlukr16k0e0akd27ge4use7fdn8rer.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+{% endblock %}
+{% block block1 %}
+<div id="main" align="center">
+<article class="student featured">
+        {% if user.is_authenticated %}
+
+
+
+  <!--For Item Coord-->
+{% if user.is_staff and not user.is_superuser %}
+		<h2>Welcome {{ user.username }}!</h2>
+		{% for g in item %}
+
+    <h3 class="intro-text text-center">{{ g.name }} ( {{g.date}} )
+    </h3>
+    <hr>
+
+<a href="/su/coord/upload/{{ g.gm_id }}/" class="col-lg-3"><button type="submit" class="btn btn-lg btn-primary " name="excel" value="Add excel">Upload Excel</button></a>
+<a href="/su/coord/view/{{ g.gm_id }}/"  class="col-lg-3"><button type="submit" class="btn btn-lg btn-success " name="item" value="View Item">View Item</button></a>
+<a class="col-lg-3"><button type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-target="#search{{ g.gm_id }}">Download Excel</button></a>
+<br><br>
+<div id="search{{ g.gm_id }}" class="modal fade" role="dialog">
+  <div class="modal-dialog ">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title text-center">{{ g.name }}</h4>
+
+        </div>
+      <div class="modal-body">
+
+        <form role="form"  class="form-horizontal" method="post" action="/su/export/{{ g.gm_id }}/" >
+{% csrf_token %}
+Bhawan:
+<select  name="bhawan">
+
+<option value="All">All</option>
+<option value="MR">MR</option>
+  <option value="RM">RM</option>
+  <option value="BD">BD</option>
+  <option value="RP">RP</option>
+	 <option value="AK">AK</option>
+
+ <option value="BG">BG</option>
+	  <option value="VK">VK</option>
+  <option value="ML">ML</option>
+  <option value="MLE">MLE</option>
+
+  <option value="GN">GN</option>
+
+
+  <option value="KR">KR</option>
+
+  <option value="SK">SK</option>
+	<option value="VY">VY</option>
+	<option value="CVR">CVR</option>
+	<option value="SR">SR</option>
+  <option value="DS">DS</option>
+
+</select>
+<br>
+<br>
+
+<input type="submit" class="btn btn-lg btn-success btn-block "  value="Submit" onClick="return confirm('This list is temporary. It is bound to change.');">
+</form>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+		{% endfor %}
+		{% for g in wear %}
+
+                    <h2 class="intro-text text-center">{{ g.name }} ( {{g.date}} )
+                    </h2>
+
+		<button onClick="window.location.href='/su/coord/upload/{{ g.gm_id }}/'" type="submit" class="btn btn-lg btn-primary " name="excel" value="Add excel">Upload Excel</button>
+		<button onClick="window.location.href='/su/coord/view/{{ g.gm_id }}/'" type="submit" class="btn btn-lg btn-success " name="item" value="View Item">View Merch</button>
+    <button name = type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-target="#search{{ g.gm_id }}">Download Excel</button>
+<br><br>
+    <!-- The Modal -->
+  	<div id="search{{ g.gm_id }}" class="modal fade" role="dialog">
+  <div class="modal-dialog ">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+	<div class="modal-header">
+
+        <h4 class="modal-title text-center">{{ g.name }}</h4>
+
+      </div>
+      <div class="modal-body">
+        <form role="form"  class="form-horizontal" method="post" action="/su/export/{{ g.gm_id }}/" >
+{% csrf_token %}
+Bhawan:
+<select  name="bhawan">
+
+<option value="All">All</option>
+<option value="MR">MR</option>
+  <option value="RM">RM</option>
+  <option value="BD">BD</option>
+  <option value="RP">RP</option>
+	 <option value="AK">AK</option>
+
+ <option value="BG">BG</option>
+	  <option value="VK">VK</option>
+  <option value="ML">ML</option>
+  <option value="MLE">MLE</option>
+
+  <option value="GN">GN</option>
+
+
+  <option value="KR">KR</option>
+
+  <option value="SK">SK</option>
+	<option value="VY">VY</option>
+	<option value="CVR">CVR</option>
+	<option value="SR">SR</option>
+  <option value="DS">DS</option>
+
+</select>
+<br>
+<br>
+
+{% if g.date|timesince <= "1 day" %}
+<input type="submit" class="btn btn-lg btn-success btn-block "  value="Submit"  onClick="return confirm('This list is temporary. It is bound to change.');">
+{% else %}
+<input type="submit" class="btn btn-lg btn-success btn-block "  value="Submit" >
+{% endif %}
+</form>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+
+{% endfor %}
+
+		{% for g in event %}
+
+                    <h2 class="intro-text text-center">{{ g.name }} ( {{g.date}} )
+                    </h2>
+
+
+                    <button onClick="window.location.href='/su/coord/upload/{{ g.gm_id }}/'" type="submit" class="btn btn-lg btn-primary " name="excel" value="Add excel" >Upload Excel</button>
+
+                		<button onClick="window.location.href='/su/coord/view/{{ g.gm_id }}/'" type="submit" class="btn btn-lg btn-success " name="item" value="View Item">View Event</button>
+
+                    <button type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-target="#search{{ g.gm_id }}">Download Excel</button>
+                    <br><br>
+
+                    <!-- The Modal -->
+                    <div id="search{{ g.gm_id }}" class="modal fade" role="dialog">
+                    <div class="modal-dialog ">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                    <div class="modal-header">
+
+                        <h4 class="modal-title text-center">{{ g.name }}</h4>
+
+                      </div>
+                      <div class="modal-body">
+                        <form role="form"  class="form-horizontal" method="post" action="/su/export/{{ g.gm_id }}/" >
+                    {% csrf_token %}
+                    Bhawan:
+                    <select  name="bhawan">
+
+                    <option value="All">All</option>
+                    <option value="MR">MR</option>
+                    <option value="RM">RM</option>
+                    <option value="BD">BD</option>
+                    <option value="RP">RP</option>
+                    <option value="AK">AK</option>
+
+                    <option value="BG">BG</option>
+                    <option value="VK">VK</option>
+                    <option value="ML">ML</option>
+                    <option value="MLE">MLE</option>
+
+                    <option value="GN">GN</option>
+
+
+                    <option value="KR">KR</option>
+
+                    <option value="SK">SK</option>
+                    <option value="VY">VY</option>
+                    <option value="CVR">CVR</option>
+                    <option value="SR">SR</option>
+                    <option value="DS">DS</option>
+
+                    </select>
+                    <br>
+                    <br>
+
+                    {% if g.date|timesince <= "1 day" %}
+                    <input type="submit" class="btn btn-lg btn-success btn-block "  value="Submit"  onClick="return confirm('This list is temporary. It is bound to change.');">
+                    {% else %}
+                    <input type="submit" class="btn btn-lg btn-success btn-block "  value="Submit" >
+                    {% endif %}
+                    </form>
+                      </div>
+
+                    </div>
+
+                    </div>
+                    </div>
+
+
+
+		{% endfor %}
+
+
+
+
+		<!-- For SU-->
+  	{% elif user.is_superuser %}
+
+	<button onClick="window.location.href='/su/import/'" type="submit"  name="students" value="Add students" style="margin:30px 30px">Upload Student List</button>
+
+		{% else %}
+		<!-- For students-->
+    <div align="left">
+		<!-- <h3>Name : {{ student.name }}</h3>
+		<h3>BITS ID : {{ student.bits_id }}</h3>
+		<h3>Bhawan : {{ student.bhawan }}</h3>
+		<h3>Room No. : {{ student.room_no }}</h3> -->
+    <h1>Welcome!</h1>
+  <h3>  {{ student.name }}</h3>
+  <h3>  {{ student.bits_id }}p</h3>
+  <h3>  {{ student.bhawan }} {{ student.room_no }}</h3>
+
+</div>
+<br/>
+		<h5> For any corrections or other technical assistance, please contact SU Tech Team.</h5>
+		{% endif %}
+	{% else %}
+
+
+  <article class="student featured">
+								<header class="major">
+
+									<h2><u>Student Login</u></h2>
+									<p><b>Sign In via BITS University Mail Only</b></p>
+								</header>
+								<img src="{% static 'login.png' %}" alt="" />
+								<br>
+								<br>
+              <input onClick="window.location.href='/soc/login/google-oauth2/?next=/'" type="image" src="{% static 'loginbutton.png' %}"  width="239" height="46"/>
+
+              </article>
+
+	{% endif %}
+</article>
+
+</div>
+{% endblock %}

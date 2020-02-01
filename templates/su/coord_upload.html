@@ -1,0 +1,79 @@
+{% extends 'su/base.html' %}
+
+{% load staticfiles %}
+
+
+
+{% block block1 %}
+<div id="main" align="center">
+<article class="student featured">
+{% if user.is_staff %}
+
+	{% if e == 2 %}
+
+                    <h2 class="intro-text text-center">{{ item.name }} : Upload List</h2>
+
+
+                   <h5 class="text-center text-info"> Supported File Formats: xls, xlsx, csv</h5>
+<h1>{{ invalid }}</h1>
+        <form id="coord_upload"  role="form"  class="form-horizontal"  method="post"  enctype="multipart/form-data">
+            {% csrf_token %}
+           {% for field in form %}
+		<div class="form-group">
+	<div class="text-danger ">{{ field.errors }}</div>
+      	<label class="control-label " >{{ field.label_tag }}</label>
+	      	<div >
+		{{ field }}
+		</div>
+      	</div>
+		{% endfor %}
+          <input class=" btn btn-lg btn-info" type="submit" name="submit" value="Add Excel" />
+        </form>
+
+<h3 class="text-right"><a href="/su/invalid_ids/{{ item.gm_id }}/"><button>Invalid IDs Uploaded</button></a></h3>
+
+				<br><hr>
+				<h3><u>Instructions:</u></h3>
+				<h4 class="text-info"> 1. Please upload the excel sheet in this format (BITS ID as a combination of 12 alpha-numeric characters) leaving all other cells empty.</h4>
+				<h5 class="text-info"> For Event : | 2017B2A21037 |  1000  |</h5>
+				<h5 class="text-info"> For Merchandise : | 2017B2A21037 |  L  |  1000  |</h5>
+				<h4 class="text-info"> 2. Use the first row to specify the parameters, start adding the signings from the second row.</h4>
+				<h5 class="text-info"> For Event : |    BITS ID    | Amount |</h5>
+				<h5 class="text-info"> For Merchandise : |    BITS ID    |  Size  | Amount |</h5>
+				<h4>3. Make sure that each ID is being uploaded <u>only once</u>, sheets with duplicate or invalid IDs are not accepted.</h4>
+				<h4>4. Last date for uploading excel is before {{ item.deadline2 }}.</h4>
+
+	{% elif e == 4 %}<!-- NOTE: For future, if want spot signing  -->
+	<h3 class="text-center text-danger">It is over. You can now upload Spot Signing list .</h1>
+
+
+                    <h2 class="intro-text text-center">{{ item.name }} : Upload Spot Signing list
+                    </h2>
+
+                   <h5 class="text-center text-info"> Supported File Formats: xls, xlsx, csv</h5>
+{{ invalid }}
+        <form id="coord_upload"  role="form"  class="form-horizontal"  method="post"  enctype="multipart/form-data">
+            {% csrf_token %}
+           {% for field in form %}
+		<div class="form-group">
+	<div class="text-danger ">{{ field.errors }}</div>
+      	<label class="control-label " >{{ field.label_tag }}</label>
+	      	<div >
+		{{ field }}
+		</div>
+      	</div>
+		{% endfor %}
+          <input class=" btn btn-lg btn-info" type="submit" name="submit" value="Add Excel" />
+        </form>
+	<br/>
+	{% else %}
+	<h3 class="text-center">Uploading Students list date is over.</h3>
+	<!-- <h3 class="text-center">Only Spot Signings can be uploaded.</h3> -->
+	{% endif %}
+{% else %}
+<h3>You are not allowed to view this page</h3>
+<h3>Login to View this page</h3>
+{% endif %}
+</article>
+</div>
+{% endblock %}

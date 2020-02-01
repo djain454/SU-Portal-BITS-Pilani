@@ -1,0 +1,59 @@
+{% extends 'su/base.html' %}
+
+{% load staticfiles %}
+
+{% block block1 %}
+	<div id="main">
+<article class="student featured">
+{% if user.is_superuser %}
+
+	<!-- NOTE: No limit of mails for gensec and president  -->
+ <!-- <h2 class="intro-text"><strong>Total Mails : 1000	&ensp; Mails sent today : {{datemail.mails}} &ensp; Mails left: {{mailsleft}}</strong>
+</h2> -->
+
+                    <h2 class="intro-text text-center"><strong><u>{{item.name}}</u></strong>
+                    </h2>
+
+<h2>Mails sent today : {{datemail.mails}}</h2>
+
+                    <h2 class="intro-text text-center"><strong>Total students registered: {{registered}} </strong>
+                    </h2>
+<h2><button class="btn btn-lg btn-success" id="sendmail1">Cancellation Mail</button></h2>
+
+
+
+{% else %}
+<h3>You are not allowed to view this page</h3>
+<h3>Login to View this page</h3>
+{% endif %}
+</article>
+</div>
+{% endblock %}
+{% block script %}
+  <script>
+    $("#sendmail1").click(function () {
+		console.log("{{item.name}}")
+		$(this).text("Processing...");
+		 $(this).prop('disabled', true)
+      $.ajax({
+        url: '/su/ajax/su/item/{{item.gm_id}}/sendmail1/',
+        data: {
+          'itemid': "{{item.name}}"
+        },
+        dataType: 'json',
+        success: function (response) {
+          if (response.is_taken) {
+            alert(response.is_taken);
+            $("#sendmail1").prop('disabled', false);
+	 		$("#sendmail1").text("Cancellation Mail");
+
+          }
+        }
+
+      });
+
+    });
+
+  </script>
+
+{% endblock %}

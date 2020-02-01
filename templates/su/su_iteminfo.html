@@ -1,0 +1,95 @@
+{% extends 'su/base.html' %}
+
+{% load staticfiles %}
+
+{% block block1 %}
+	<div id="main" align="center">
+<article class="student featured">
+{% if user.is_superuser %}
+
+
+    {% if wear %}
+		    <h2 class="brand-before text-center">
+               		<small><strong><u>Merchandise</u></strong></small>
+		     </h2><u>
+                    <h1 class="brand-name text-center">{{ wear.name }}</h1>
+
+
+
+<h4 class="text-center">Image</h4>
+<img class="img-responsive img-full" width="60%" src="{{ wear.image.url }} " alt="">
+<br><br>
+	<h3>Cancellations starts on {{ wear.deadline2 }}<h3>
+	<h3 >Cancellations Deadline: {{wear.deadline}}</h3>
+	<h3  class="text-right"  >Status: {{wear.status}}</h3>
+
+		<h3>price: {{wear.price}}</h3>
+
+	{% ifequal e 4 %}
+	<h1>Signing is over</h1>
+	<h3 class="col-md-3"><a href="/su/stats/{{wear.gm_id}}/"><button type="button" class="btn btn-lg btn-info"><strong>View Stats</strong></button></a></h3>
+	{% else %}
+	{% ifequal wear.status "Active" %}
+	<h3 class="col-md-3"><a href="/su/stats/{{wear.gm_id}}/"><button type="button" class="btn btn-lg btn-info"><strong>View Stats</strong></button></a></h3>
+	<h3 class="text-right"><a href="/su/su/item/{{wear.gm_id}}/sendmail/"><button type="button" class="btn btn-lg btn-warning" >Send Mail</button></a></h3>
+	<h3 class=" text-right"><a href="/su/su/item/{{wear.gm_id}}/inactive/"><button type="button" style="background-color: #f44336;" onClick="return confirm('Are you sure you want to Inactivate  {{ wear.name }}?');">Inactivate</button></a></h3>
+	{% else %}
+	<h3 class="text-right"><a href="/su/su/item/{{wear.gm_id}}/active/"><button type="button" style="background-color: #4CAF50; color:#000000;" onClick="return confirm('Are you sure you want to Activate {{ wear.name }}?');">Activate</button></a></h3>
+	{% endifequal %}
+	{% endifequal %}
+
+</form>
+
+    {% endif %}
+
+    {% if event %}
+		    <h2 class="brand-before text-center">
+               		<small><strong><u>Events</u></strong></small>
+		     </h2>
+                    <h1 class="brand-name text-center">{{ event.name }}</h1>
+
+
+
+<h4 class="text-center">Image</h4>
+<img class="img-responsive img-full" width="60%" src="{{ event.image.url }} " alt="">
+<br><br>
+	<h3>Cancellations starts on {{ event.deadline2 }}<h3>
+	<h3 >Cancellations Deadline: {{event.deadline}}</h3>
+	<h3  class="text-right"  >Status: {{event.status}}</h3>
+
+		<h3>price: {{event.price}}</h3>
+		<h3>venue: {{event.venue}}</h3>
+
+	{% ifequal e 4 %}
+	<h1>Signing is over</h1>
+	<h3 class="col-md-3"><a href="/su/stats/{{event.gm_id}}/"><button type="button" class="btn btn-lg btn-info"><strong>View Stats</strong></button></a></h3>
+	{% else %}
+	{% ifequal event.status "Active" %}
+	<h3 class="col-md-3"><a href="/su/stats/{{event.gm_id}}/"><button type="button" class="btn btn-lg btn-info"><strong>View Stats</strong></button></a></h3>
+	<h3 class="text-right"><a href="/su/su/item/{{event.gm_id}}/sendmail/"><button type="button" class="btn btn-lg btn-warning" >Send Mail</button></a></h3>
+	<h3 class=" text-right"><a href="/su/su/item/{{event.gm_id}}/inactive/"><button type="button" style="background-color: #f44336;" onClick="return confirm('Are you sure you want to Inactivate {{ event.name }}?');">Inactivate</button></a></h3>
+	{% else %}
+	<h3 class="text-right"><a href="/su/su/item/{{event.gm_id}}/active/"><button type="button" style="background-color: #4CAF50; color:#000000;" onClick="return confirm('Are you sure you want to Activate {{ event.name }}?');">Activate</button></a></h3>
+	{% endifequal %}
+	{% endifequal %}
+	<!-- <h3 class="col-md-3"><button type="button" class="btn btn-lg btn-success" data-toggle="modal" data-target="#search{{ event.gm_id }}"><strong>Download List</strong></button></h3> -->
+
+
+
+</form>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+    {% endif %}
+{% else %}
+<h3>You are not allowed to view this page</h3>
+<h3>Login to View this page</h3>
+{% endif %}
+</article>
+</div>
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'su/base.html' %}
+
+{% load staticfiles %}
+
+
+{% block block1 %}
+	<div id="main">
+<article class="student featured">
+<header class="major">
+
+									
+{% if user.is_superuser %}
+
+        {% if registered %}
+        <h1 style="align: center"><strong>Registered!</strong></h1>
+
+        {% else %}
+                    <h2>Register Coords</h2>
+									
+								</header>
+
+	<form id="user_form" role="form"   method="post" action="/su/su/register/" enctype="multipart/form-data">
+
+
+        {% csrf_token %}
+	<div class="text-danger">{{ user_form.non_field_errors }}
+	{{ profile_form.non_field_errors }}</div>
+	{% for field in user_form %}
+        <div class="col-6">
+	<div class="text-danger">{{ field.errors }}</div>
+      	<label class="col-6 col-12-xsmall" >{{ field.label_tag }}</label>
+	      	<div class="col-6 col-12-xsmall">
+		{{ field }}
+		</div>
+      	</div>
+	{% endfor %}
+
+		{% for field in profile_form %}
+	<div class="col-6">
+	<div class="text-danger">{{ field.errors }}</div>
+     	 <label class="col-6 col-12-xsmall" >{{ field.label_tag }}</label>
+	      	<div class="col-6 col-12-xsmall">
+		{{ field }}
+		</div>
+      	</div>
+
+
+		{% endfor %}
+<br>
+            <input type="submit" class=" btn btn-lg btn-info " name="submit" value="Register" />
+        </form>
+
+	{% endif %}
+{% else %}
+<h3>You are not allowed to view this page</h3>
+<h3>Login to View this page</h3>
+{% endif %}
+</div>
+{% endblock %}

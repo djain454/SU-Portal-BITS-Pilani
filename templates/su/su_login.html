@@ -1,0 +1,26 @@
+{% extends 'su/base.html' %}
+{% load staticfiles %}
+{% block head_block %}<link type="text/CSS" href="{% static 'css/main1.css' %}" rel="stylesheet"> {% endblock %}
+{% block block1 %}
+<div id="main" align="center">
+<article class="student featured">
+<header class="major">
+
+									<h2><u>Admin Login</u></h2>
+									<h4 style="color:red;" >{{ invalid }}</h4>
+								</header>
+
+<form class="form-signin" role="form" method="post" action=".">
+{% csrf_token %}
+
+
+Username: <input class="form-control" placeholder="Username" id="id_username" maxlength="32" name="username" type="text" required autofocus=""/>
+Password:<input type="password" class="form-control" placeholder="Password" id="id_password" name="password"  required /><br>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit" >Login</button>
+        </form>
+        <br>
+        <br>
+</div>
+</article>
+{% endblock %}

@@ -1,0 +1,250 @@
+{% extends 'su/base.html' %}
+{% load staticfiles %}
+
+{% block title %}{{ item_name }}{% endblock %}
+
+{% block block1 %}
+<div id="main" align="center">
+<article class="student featured">
+{% if user.is_authenticated and not user.is_staff %}
+
+{% if wear %}
+{% ifequal wear.status "Active" %}
+<div align="center">
+		    <h2 class="brand-before text-center">
+                        <small><strong><u>{{ wear.meal }}</u></strong></small>
+                    </h2>
+                    <h3 class="brand-name text-center">{{ wear.name }}</h3>
+
+<h4 class="text-center">Merchandise</h4>
+<img class="img-responsive img-full" width="60%"  src="{{ wear.image.url }} " alt="">
+</div>
+	<!-- <h3>Date: {{wear.date}}<h3> -->
+	<h3>Cancellations start on: {{ wear.deadline2 }}<h3>
+	<h3 >Cancellations Deadline: {{wear.deadline}}</h3>
+
+
+		<h3>Merchandise price: {{wear.price}}</h3>
+{% ifequal student.status "Signed Up" %}
+<h3>Student Charged: {{student_price}}</h3>
+	<h3>Status: {{ student.status }}</h3>
+	<h3>Registered For Size: {{ student.meal }}</h3>
+{% ifequal e 1 %}
+<div class="modal-body">
+	<form name="myForm" class = "form-horizontal" method = "post" action = '/su/student/item/{{ wear.gm_id }}/cancel/'>
+	{% csrf_token %}
+
+</div>
+<div class="form-group text-center">
+				<button type="submit"  class="btn btn-success">Cancel</button>
+</div><br>
+</form>
+	<!-- <h3><a href='/su/student/item/{{ wear.gm_id }}/cancel/' >Cancel</a></h3> -->
+	<div class="text-right">
+
+{% endifequal %}
+{% ifequal e 3 %}
+	<h2>Deadline is over!</h2>
+{% endifequal %}
+{% ifequal e 4 %}
+	<h2>Item is over</h2>
+{% endifequal %}
+{% ifequal e 2 %}
+	<h2>Cancellations have not yet started</h2>
+
+
+{% endifequal %}
+	{% else %}
+	<h3>Status: Not registered </h3>
+<div class="text-right">
+{% ifequal e 3 %}
+
+	<h2>Registrations Are Over!</h2>
+{% else %}
+{% ifequal e 4 %}
+
+	<h2>Item is Over!</h2>
+	{% else %}
+	<div class="modal-body">
+		<form name="myForm" class = "form-horizontal" method = "post" action = '/su/student/item/{{ wear.gm_id }}/register/signup/'>
+		{% csrf_token %}
+		<div class = "form-group">
+			<div class="col-sm-12">
+				<label class="control-label col-sm-2">Size </label>
+					<div class="col-sm-10">
+							<select class="form-control" name = "size" id="size">
+							<option value="S">S</option>
+							<option value="M">M</option>
+							<option value="L">L</option>
+							<option value="XL">XL</option>
+							<option value="XXL">XXL</option>
+							<option value="XXXL">XXXL</option>
+							</select>
+							</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-group text-center">
+					<button type="submit"  class="btn btn-success">Submit</button>
+</div><br>
+</form>
+{% endifequal %}
+{% endifequal %}
+
+<!-- <h3>Status: Not registered </h3>
+
+<div class="modal-body">
+	<form name="myForm" class = "form-horizontal" method = "post" action = '/su/student/item/{{ event.gm_id }}/register/signup/'>
+	{% csrf_token %}
+
+</div>
+<div class="form-group text-center">
+				<button type="submit"  class="btn btn-success">Register</button>
+</div>
+</form>
+
+-->
+
+</div>
+<!-- <div id="myWear" class="modal fade" role="dialog">
+  <div class="modal-dialog"> -->
+
+    <!-- Modal content-->
+    <!-- <div class="modal-content"> -->
+      <!-- <div class="modal-header">
+
+        <h4 class="modal-title">Choose your size</h4>
+      </div> -->
+
+    <!-- </div> -->
+
+  <!-- </div>
+</div> -->
+	{% endifequal %}
+{% else %}
+<h3> Wear does not exist or has been made inactive.</h3>
+{% endifequal %}
+
+
+{% endif %}
+
+
+    {% if event %}
+		<div align="center">
+    {% ifequal event.status "Active" %}
+		    <h2 class="brand-before text-center">
+                        <small><strong><u>{{ event.meal }}</u></strong></small>
+                    </h2>
+                    <h2 class="brand-name text-center">{{ event.name }}</h2>
+
+
+
+<h4 class="text-center">event </h4>
+<img class="img-responsive img-full" width="60%" src="{{ event.image.url }} " alt="">
+</div>
+	<!-- <h3>Date: {{ event.date }}<h3> -->
+	<h3>Cancellations start on: {{ event.deadline2 }}<h3>
+	<h3 >Cancellations Deadline: {{event.deadline}}</h3>
+
+
+		<h3>Event price: {{event.price}}</h3>
+		<h3>venue: {{event.venue}}</h3>
+
+	{% ifequal student.status "Signed Up" %}
+	<h3>Student Charged: {{student_price}}</h3>
+	<h3>Status: {{ student.status }}</h3>
+	<!-- <h3>Registered For : {{ student.meal }}</h3> -->
+{% ifequal e 1 %}
+<div class="modal-body">
+	<form name="myForm" class = "form-horizontal" method = "post" action = '/su/student/item/{{ event.gm_id }}/cancel/'>
+	{% csrf_token %}
+
+</div>
+<div class="form-group text-center">
+				<button type="submit"  class="btn btn-success">Cancel</button>
+</div><br>
+</form>
+	<!-- <h2><a href='/su/student/item/{{ event.gm_id }}/cancel/' >Cancel</a></h2> -->
+	<div class="text-right">
+
+{% endifequal %}
+{% ifequal e 3 %}
+	<h2>Deadline is over!</h2>
+{% endifequal %}
+{% ifequal e 4 %}
+	<h2>Event is over</h2>
+{% endifequal %}
+{% ifequal e 2 %}
+	<h2>Cancellations have not yet started</h2>
+
+
+{% endifequal %}
+	{% else %}
+	<h3>Status: Not registered </h3>
+<div class="text-right">
+{% ifequal e 3 %}
+
+	<h2>Registrations Are Over!</h2>
+{% endifequal %}
+{% ifequal e 4 %}
+
+	<h2>Event is Over!</h2>
+{% endifequal %}
+{% ifequal e 1 %}
+<div class="modal-body">
+	<form name="myForm" class = "form-horizontal" method = "post" action = '/su/student/item/{{ event.gm_id }}/register/signup/'>
+	{% csrf_token %}
+
+</div>
+<div class="form-group text-center">
+				<button type="submit"  class="btn btn-success">Register</button>
+</div>
+</form>
+
+
+	<!-- <h2><button class="btn btn-lg btn-success" onClick="return confirm('Are you sure you want to Register for {{ event.name }}?');window.location.href='/su/student/item/{{ event.gm_id }}/register/signup/';">Register</button></h2> -->
+
+{% endifequal %}
+{% ifequal e 2 %}
+<div class="modal-body">
+	<form name="myForm" class = "form-horizontal" method = "post" action = '/su/student/item/{{ event.gm_id }}/register/signup/'>
+	{% csrf_token %}
+
+</div>
+<div class="form-group text-center">
+				<button type="submit"  class="btn btn-success">Register</button>
+</div>
+</form>
+<!-- <h2><button class="btn btn-lg btn-success" onClick="return confirm('Are you sure you want to Register for {{ event.name }}?');window.location.href='/su/student/item/{{ event.gm_id }}/register/signup/';">Register</button></h2> -->
+
+
+
+{% endifequal %}
+</div>
+
+	{% endifequal %}
+{% else %}
+<h3> Event does not exist or has been made inactive.</h3>
+{% endifequal %}
+
+
+{% endif %}
+
+
+<!-- {% else %}
+<div class="text-center">
+<h3>Login to View this page</h3>
+
+	<h2 class="intro-text text-center">Student Login</h2>
+
+	<a href="/soc/login/google-oauth2/?next=/su/student/item/{{ gmid }}/" ><img src="{% static 'user-logo.png' %}" style="height:228px;"></a>
+	<br/>
+	<a href="/soc/login/google-oauth2/?next=/su/student/item/{{ gmid }}/"  ><button type="button" class="btn btn-lg btn-danger">BITS MAIL</button></a>
+
+	<h4 class="text-center">*Login through BITS MAIL only</h4>
+</div>
+
+{% endif %} -->
+</article>
+</div>
+{% endblock %}

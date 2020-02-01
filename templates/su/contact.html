@@ -1,0 +1,325 @@
+{% extends 'su/base.html' %}
+{% load staticfiles %}
+{% block head_block %}
+<style>
+
+.team {
+    position: relative;
+    background-color: #F4F4F4;
+    padding: 40px 20px;
+    margin: 15px 0px;
+		align-items: center;
+		align: center;
+		width: auto;
+}
+
+.team::after {
+    content: "";
+    background-color: #1C1D21;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 0%;
+    z-index: 1;
+    -webkit-transition: 0.2s height;
+    transition: 0.2s height;
+		align-items: center;
+}
+
+.team:hover:after {
+    height: 100%;
+}
+
+.team-img {
+    position: relative;
+    margin-bottom: 20px;
+    z-index: 11;
+}
+
+.team-img>img {
+  width: 30vh;
+  border-radius: 50%;
+}
+
+.team .overlay {
+    background: #1C1D21;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    -webkit-transition: 0.2s opacity;
+    transition: 0.2s opacity;
+}
+
+.team:hover .overlay {
+    opacity: 0.8;
+}
+
+.team .team-content {
+    text-align: center;
+    position: relative;
+    z-index: 11;
+}
+
+.team .team-content h3 {
+    margin-bottom: 10px;
+    -webkit-transition: 0.2s color;
+    transition: 0.2s color;
+		font-size: 2vh
+}
+
+.team .team-content span {
+    font-size: 14px;
+    text-transform: uppercase;
+    -webkit-transition: 0.2s color;
+    transition: 0.2s color;
+}
+
+.team:hover .team-content h3 {
+    color: #FFF;
+		font-size: 2vh
+}
+
+.team:hover .team-content span {
+    color: #6195FF;
+}
+
+.team .team-social {
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    -webkit-transition: 0.2s opacity;
+    transition: 0.2s opacity;
+}
+
+.team .team-social a {
+    display: block;
+    line-height: 50px;
+    width: 50px;
+    text-align: center;
+    background-color: #6195FF;
+    color: #FFF;
+}
+
+.team:hover .team-social {
+    opacity: 1;
+}
+
+
+</style>
+{% endblock %}
+{% block block1 %}
+<div id="main" align="center">
+<article class="student featured">
+
+
+
+								<div id="team" class="section md-padding">
+
+		<!-- Container -->
+		<div class="container">
+
+			<div>
+				<h2 class="title"><u>SU Representatives</u></h2>
+			</div>
+			<!-- Row -->
+			<div class="row">
+
+
+				<!-- team -->
+				<div class="col-sm-4">
+					<div class="team">
+						<div class="team-img">
+							<img class="img-responsive" src="{% static 'satyansh.jpg' %}" alt="">
+							<div class="overlay">
+								<div class="team-social">
+
+									<a href="https://www.linkedin.com/in/satyansh-rai-997b69146/"><i class="fa fa-linkedin"></i></a>
+
+										</div>
+							</div>
+						</div>
+						<div class="team-content">
+							<h3>Satyansh Rai</h3>
+							<span>President</span>
+              <h6>+91-9151178228<h6>
+						</div>
+					</div>
+				</div>
+				<!-- /team -->
+
+
+				<!-- team -->
+				<div class="col-sm-4">
+					<div class="team">
+						<div class="team-img">
+							<img class="img-responsive" src="{% static 'akash.jpg' %}" alt="">
+							<div class="overlay">
+								<div class="team-social">
+
+									<a href="https://www.linkedin.com/in/akashsingh24/"><i class="fa fa-linkedin"></i></a>
+
+									</div>
+							</div>
+						</div>
+						<div class="team-content">
+							<h3>Akash Singh</h3>
+							<span>General Secretary</span>
+              <h6>+91-9468923617<h6>
+						</div>
+					</div>
+				</div>
+				<!-- /team -->
+
+			</div>
+			<!-- /Row -->
+
+		</div>
+		<!-- /Container -->
+
+	</div>
+
+<br>
+
+								<div id="team" class="section md-padding">
+
+		<!-- Container -->
+		<div class="container">
+
+			<div class="section-header text-center">
+				<h2 class="title"><u>SU Portal Team</u></h2>
+			</div>
+			<!-- Row -->
+			<div class="row">
+
+
+				<!-- team -->
+				<div class="col-sm-4">
+					<div class="team">
+						<div class="team-img">
+							<img class="img-responsive" src="{% static 'bubna.jpg' %}" alt="">
+							<div class="overlay">
+								<div class="team-social">
+
+									<a href="https://www.linkedin.com/in/rahul-b-003863114/"><i class="fa fa-linkedin"></i></a>
+
+								</div>
+							</div>
+						</div>
+						<div class="team-content">
+							<h3>Rahul Bubna</h3>
+							<span>Marketing & Operations Executive</span>
+              <h6>+91-8952824766<h6>
+						</div>
+					</div>
+				</div>
+				<!-- /team -->
+
+				<!-- team -->
+				<div class="col-sm-4">
+					<div class="team">
+						<div class="team-img">
+							<img class="img-responsive" src="{% static 'gaur.jpeg' %}" alt="">
+							<div class="overlay">
+								<div class="team-social">
+
+									<a href="https://www.linkedin.com/in/abhishek-gaur-8ba296144/"><i class="fa fa-linkedin"></i></a>
+									<a href="https://github.com/abhishekspeer"><i class="fa fa-github"></i></a>
+								</div>
+							</div>
+						</div>
+						<div class="team-content">
+							<h3>Abhishek Gaur</h3>
+							<span>Back-End Developer</span>
+              <h6>+91-9636588498<h6>
+						</div>
+					</div>
+				</div>
+				<!-- /team -->
+
+				<!-- team -->
+				<div class="col-sm-4">
+					<div class="team">
+						<div class="team-img">
+							<img class="img-responsive" src="{% static 'dj.jpg' %}" alt="">
+							<div class="overlay">
+								<div class="team-social">
+
+									<a href="https://www.linkedin.com/in/deepak-jain-7ba2b6155/"><i class="fa fa-linkedin"></i></a>
+									<a href="https://github.com/djain454"><i class="fa fa-github"></i></a>
+
+								</div>
+							</div>
+						</div>
+						<div class="team-content">
+							<h3>Deepak Jain</h3>
+							<span>Front-End Developer</span>
+              <h6>+91-8107810989<h6>
+						</div>
+					</div>
+				</div>
+				<!-- /team -->
+<!-- </div> -->
+
+				<!-- team -->
+				<div class="col-sm-4">
+					<div class="team">
+						<div class="team-img">
+							<img class="img-responsive" src="{% static 'sombudhha.jpeg' %}" alt="">
+							<div class="overlay">
+								<div class="team-social">
+
+									<a href="https://www.linkedin.com/in/sombuddha-chakravarty-9482b5131/"><i class="fa fa-linkedin"></i></a>
+									<a href="https://github.com/sammy1997"><i class="fa fa-github"></i></a>
+
+								</div>
+							</div>
+						</div>
+						<div class="team-content">
+							<h3>Sombuddha Chakravarty</h3>
+							<span>Mentor</span>
+              <h6>+91-9829996855<h6>
+						</div>
+					</div>
+				</div>
+				<!-- /team -->
+
+				<!-- team -->
+				<div class="col-sm-4">
+					<div class="team">
+						<div class="team-img">
+							<img class="img-responsive" src="{% static 'abhijit.jpg' %}" alt="">
+							<div class="overlay">
+								<div class="team-social">
+
+									<a href="https://www.linkedin.com/in/abhijit-kumar-8ba119168/"><i class="fa fa-linkedin"></i></a>
+									<a href="https://github.com/abhi20161997"><i class="fa fa-github"></i></a>
+
+								</div>
+							</div>
+						</div>
+						<div class="team-content">
+							<h3>Abhijit Kumar</h3>
+							<span>Mentor</span>
+              <h6>+91-9829864663<h6>
+						</div>
+					</div>
+				</div>
+				<!-- /team -->
+
+
+			<!-- /Row -->
+
+
+		</div>
+		<!-- /Container -->
+
+
+
+</article>
+</div>
+{% endblock %}

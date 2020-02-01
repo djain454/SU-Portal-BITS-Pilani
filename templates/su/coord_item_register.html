@@ -1,0 +1,174 @@
+{% extends 'su/base.html' %}
+
+{% load staticfiles %}
+
+{% block head_block %}
+
+<link href="{% static 'dcalendar.picker.css' %}" rel="stylesheet" type="text/css">
+
+{% endblock %}
+
+{% block block1 %}
+<div id="main" align="center" >
+<article class="student featured">
+{% if user.is_staff %}
+
+                    <h2 class="intro-text text-center"><u>Add Signing</u>
+                    </h2>
+
+{% if done %}
+	<h3>Done!</h3>
+
+{% else %}
+	<div class="text-center">
+	<select class="text-center" name="signingtype" id="signingtype">
+	<option id="field-cc" value="">Choose Category</option>
+  <option id="field-wear" value="wear">Wear</option>
+	<option id="field-event" value="event">Event</option>
+	</select>
+	</div>
+
+<div align="left">
+
+<form role="form"  class="form-horizontal" method="post" action="/su/coord/register/"  enctype="multipart/form-data" >
+	{% csrf_token %}
+<div id="wear">
+  <br>
+{% for field in form1 %}
+<div class="form-group">
+
+<label class="control-label col-sm-2" >{{ field.label_tag }} </label>
+<div class="col-sm-5">
+        {{ field }}
+	{{ field.errors }}
+	{{ field.help_text }}
+      </div>
+    </div>
+    {% endfor %}
+
+
+	<div class="form-group">
+	<label class="control-label col-sm-2" >*Signings & Cancellations Active Upto</label>
+	<div class="col-sm-5">
+<input class="form-control" name="itemdate1" id="demo2" type="text">
+	</div>
+	</div>
+	* 5 days prior to this date a mail will be sent to all the students
+	signed up for cancellation. <br> * 2 days prior to this date the cancellations will stop. <br> <br>
+	<div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-lg btn-primary " name="submit2" value="Add">Submit</button>
+      </div>
+    </div>
+	</div>
+	</form>
+
+
+<form role="form"  class="form-horizontal" method="post" action="/su/coord/register/"  enctype="multipart/form-data" >
+{% csrf_token %}
+	<div id="event">
+	{% for field in form2 %}
+    <div class="form-group">
+
+      <label class="control-label col-sm-2" >{{ field.label_tag }} </label>
+      <div class="col-sm-5">
+        {{ field }}
+	{{ field.errors }}
+	{{ field.help_text }}
+      </div>
+    </div>
+    {% endfor %}
+	<div class="form-group">
+	<label class="control-label col-sm-2" >*Signings & Cancellations Active Upto</label>
+	<div class="col-sm-5">
+<input class="form-control" name="itemdate2" id="demo3" type="text">
+
+	</div>
+	</div>
+  * 5 days prior to this date a mail will be sent to all the students
+	signed up for cancellation. <br> * 2 days prior to this date the cancellations will stop. <br> <br>
+	<div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-lg btn-primary " name="submit3" value="Add">Submit</button>
+      </div>
+    </div>
+	</div>
+	</form>
+</div>
+
+
+
+
+
+
+
+	{% endif %}
+
+{% else %}
+<h3>You are not allowed to view this page</h3>
+<h3>Login to View this page</h3>
+{% endif %}
+
+</article>
+</div>
+
+{% endblock %}
+
+
+
+  {% block script %}
+
+	<script>
+	$(document).ready(function() {
+	$('#wear').hide(); //hide field on start
+ 	$('#event').hide(); //hide field on start
+	$('#signingtype').change(function() {
+
+	 var $index = $('#signingtype').index(this);
+
+	 if($('#signingtype').val() == 'wear'){
+	 $('#wear').show(); //this field is hidden
+
+	 $('#event').hide(); //this field is hidden
+	 }
+	 if($('#signingtype').val() == 'event'){
+	 $('#wear').hide(); //this field is hidden
+
+	 $('#event').show(); //this field is hidden
+	 }
+	 if($('#signingtype').val() == ''){
+	$('#wear').hide(); //this field is hidden
+
+	$('#event').hide(); //this field is hidden
+	}
+
+        });
+ });
+</script>
+<script src="{% static 'dcalendar.picker.js' %}"></script>
+<script>
+$('#demo').dcalendarpicker({
+format:'yyyy-mm-dd'
+});
+
+</script>
+<script>
+$('#demo2').dcalendarpicker({
+format:'yyyy-mm-dd'
+});
+
+</script>
+<script>
+$('#demo3').dcalendarpicker({
+format:'yyyy-mm-dd'
+});
+
+</script>
+
+
+
+
+
+
+
+{% endblock %}

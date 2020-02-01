@@ -7,7 +7,7 @@ django-storages==1.7.1
 ecdsa==0.13
 et-xmlfile==1.0.1
 future==0.17.1
-gunicorn==19.4.5
+gunicorn==19.5.0
 idna==2.8
 jdcal==1.4
 jose==1.0.0
